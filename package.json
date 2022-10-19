@@ -1,7 +1,7 @@
 {
   "name": "nextjs-mongodb-app",
   "version": "1.0.0",
-  "description": "Full fledged app made with Next.JS and MongoDB",
+  "description": "An app to raise the next generation of PMs",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",

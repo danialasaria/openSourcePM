@@ -12,6 +12,7 @@ import toast from 'react-hot-toast';
 import styles from './Auth.module.css';
 
 const Login = () => {
+  //get values from inputs on submit
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -19,6 +20,8 @@ const Login = () => {
 
   const { data: { user } = {}, mutate, isValidating } = useCurrentUser();
   const router = useRouter();
+
+  //as soon as SWR cache returns a user they will be redirected to the feed
   useEffect(() => {
     if (isValidating) return;
     if (user) router.replace('/feed');
@@ -37,6 +40,7 @@ const Login = () => {
             password: passwordRef.current.value,
           }),
         });
+        //if response is successful update the SWR cache using mutate
         mutate({ user: response.user }, false);
         toast.success('You have been logged in.');
       } catch (e) {
@@ -51,7 +55,7 @@ const Login = () => {
   return (
     <Wrapper className={styles.root}>
       <div className={styles.main}>
-        <h1 className={styles.title}>Login to App</h1>
+        <h1 className={styles.title}>Login to the Future</h1>
         <form onSubmit={onSubmit}>
           <Input
             ref={emailRef}

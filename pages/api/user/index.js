@@ -8,6 +8,8 @@ import { v2 as cloudinary } from 'cloudinary';
 import multer from 'multer';
 import nc from 'next-connect';
 
+//multer is a package to parse uploaded files
+//initialize an instance of multer configured to save the file to our temp folder
 const upload = multer({ dest: '/tmp' });
 const handler = nc(ncOpts);
 
@@ -32,6 +34,7 @@ handler.get(async (req, res) => {
   return res.json({ user: req.user });
 });
 
+//to update user profile you send a PATCH request to /api/user
 handler.patch(
   upload.single('profilePicture'),
   validateBody({
@@ -43,6 +46,7 @@ handler.patch(
     },
     additionalProperties: true,
   }),
+  //check if user is logged in
   async (req, res) => {
     if (!req.user) {
       req.status(401).end();
@@ -51,7 +55,9 @@ handler.patch(
 
     const db = await getMongoDb();
 
+    //access the file via req.file
     let profilePicture;
+    //upload an image by "cloudinary.uploader.upload(imagePath)"
     if (req.file) {
       const image = await cloudinary.uploader.upload(req.file.path, {
         width: 512,
@@ -88,6 +94,7 @@ handler.patch(
   }
 );
 
+//disable next.js 9 body-parser because form parsing is handled by 'Multer'
 export const config = {
   api: {
     bodyParser: false,

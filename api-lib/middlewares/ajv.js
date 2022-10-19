@@ -1,5 +1,8 @@
 import Ajv from 'ajv';
 
+//good practice to validate all income request bodies
+//json schmea->creates ajv validate function->return middleware
+
 export function validateBody(schema) {
   const ajv = new Ajv();
   const validate = ajv.compile(schema);

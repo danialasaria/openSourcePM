@@ -3,14 +3,17 @@ import { ObjectId } from 'mongodb';
 import normalizeEmail from 'validator/lib/normalizeEmail';
 
 export async function findUserWithEmailAndPassword(db, email, password) {
+  //canonical representation of email address
   email = normalizeEmail(email);
   const user = await db.collection('users').findOne({ email });
+  //compare hashed password with whats stored in the database
   if (user && (await bcrypt.compare(password, user.password))) {
     return { ...user, password: undefined }; // filtered out password
   }
   return null;
 }
 
+//use ObjectID to convert from string to MongoDB collection type
 export async function findUserForAuth(db, userId) {
   return db
     .collection('users')
@@ -63,10 +66,13 @@ export async function insertUser(
     username,
     bio,
   };
+  //hash password
   const password = await bcrypt.hash(originalPassword, 10);
   const { insertedId } = await db
     .collection('users')
+    // pass the password independently and not right into the user object (to avoid returning the password later)
     .insertOne({ ...user, password });
+  // attach the inserted id (we don't know beforehand) to the user object
   user._id = insertedId;
   return user;
 }

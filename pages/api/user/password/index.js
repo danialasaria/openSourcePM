@@ -9,6 +9,7 @@ const handler = nc(ncOpts);
 handler.use(...auths);
 
 handler.put(
+  //validate the body
   validateBody({
     type: 'object',
     properties: {
@@ -18,6 +19,7 @@ handler.put(
     required: ['oldPassword', 'newPassword'],
     additionalProperties: false,
   }),
+  //check if user logged in
   async (req, res) => {
     if (!req.user) {
       res.json(401).end();

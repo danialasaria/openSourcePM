@@ -53,6 +53,7 @@ const Auth = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  //to reset password we make a PUT call to /api/user/password with the old and new password
   const onSubmit = useCallback(async (e) => {
     e.preventDefault();
     try {
@@ -125,11 +126,13 @@ const AboutYou = ({ user, mutate }) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  //onSubmit func makes PATCH request to /api/user
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
       try {
         setIsLoading(true);
+        //use FormData instead of normal 'applications/json' to allow profile picture upload and update
         const formData = new FormData();
         formData.append('username', usernameRef.current.value);
         formData.append('name', nameRef.current.value);
@@ -141,6 +144,7 @@ const AboutYou = ({ user, mutate }) => {
           method: 'PATCH',
           body: formData,
         });
+        //upon successful update, mutate the user data
         mutate({ user: response.user }, false);
         toast.success('Your profile has been updated');
       } catch (e) {
@@ -152,6 +156,7 @@ const AboutYou = ({ user, mutate }) => {
     [mutate]
   );
 
+  //every time the user prop is updated (denoted in [user] dependency array),set values of inputs accordingly
   useEffect(() => {
     usernameRef.current.value = user.username;
     nameRef.current.value = user.name;
@@ -173,6 +178,7 @@ const AboutYou = ({ user, mutate }) => {
         <span className={styles.label}>Your Avatar</span>
         <div className={styles.avatar}>
           <Avatar size={96} username={user.username} url={avatarHref} />
+          {/*logic to store profile photo*/}
           <input
             aria-label="Your Avatar"
             type="file"
@@ -198,6 +204,8 @@ const AboutYou = ({ user, mutate }) => {
 export const Settings = () => {
   const { data, error, mutate } = useCurrentUser();
   const router = useRouter();
+  //settings page is only available to those logged in
+  //if user isn't available, navigate to login page
   useEffect(() => {
     if (!data && !error) return;
     if (!data.user) {

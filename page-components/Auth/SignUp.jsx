@@ -11,17 +11,21 @@ import toast from 'react-hot-toast';
 import styles from './Auth.module.css';
 
 const SignUp = () => {
+  //useRef hook allows persistent values across renders
   const emailRef = useRef();
   const passwordRef = useRef();
   const usernameRef = useRef();
   const nameRef = useRef();
 
+  //mutate used to change the user
   const { mutate } = useCurrentUser();
 
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
+  //onSubmit makes a POST request to /api/users with email, password, username, and name
+  //ref is used to grab values from unctontrolled inputs (https://reactjs.org/docs/uncontrolled-components.html)
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();

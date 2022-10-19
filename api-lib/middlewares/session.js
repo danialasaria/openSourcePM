@@ -3,6 +3,8 @@ import MongoStore from 'connect-mongo';
 import nextSession from 'next-session';
 import { promisifyStore } from 'next-session/lib/compat';
 
+//session middleware
+//https://github.com/hoangvvo/next-session
 const mongoStore = MongoStore.create({
   clientPromise: getMongoClient(),
   stringify: false,

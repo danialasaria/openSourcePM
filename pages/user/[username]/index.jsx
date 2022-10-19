@@ -3,6 +3,7 @@ import { getMongoDb } from '@/api-lib/mongodb';
 import { User } from '@/page-components/User';
 import Head from 'next/head';
 
+//this page url is dynamic via [username param]
 export default function UserPage({ user }) {
   return (
     <>
@@ -16,6 +17,7 @@ export default function UserPage({ user }) {
   );
 }
 
+//retrieve data from the database
 export async function getServerSideProps(context) {
   const db = await getMongoDb();
 

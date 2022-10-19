@@ -32,6 +32,7 @@ export async function getMongoClient() {
    */
   if (!global.mongoClientPromise) {
     const client = new MongoClient(process.env.MONGODB_URI);
+    //it is fine to call connect even if already connected
     // client.connect() returns an instance of MongoClient when resolved
     global.mongoClientPromise = client
       .connect()

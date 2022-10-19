@@ -42,6 +42,7 @@ const UserMenu = ({ user, mutate }) => {
     };
   }, []);
 
+  //Delete request and update SWR cache using mutate
   const onSignOut = useCallback(async () => {
     try {
       await fetcher('/api/auth', {
@@ -75,7 +76,7 @@ const UserMenu = ({ user, mutate }) => {
               <a className={styles.item}>Profile</a>
             </Link>
             <Link passHref href="/settings">
-              <a className={styles.item}>Settngs</a>
+              <a className={styles.item}>Settings</a>
             </Link>
             <div className={styles.item} style={{ cursor: 'auto' }}>
               <Container alignItems="center">
