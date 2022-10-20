@@ -25,10 +25,7 @@ const Layout = ({ children }) => {
           property="og:description"
           content="An app to raise the next generation of PMs"
         />
-        <meta
-          property="og:image"
-          content="https://repository-images.githubusercontent.com/201392697/5d392300-eef3-11e9-8e20-53310193fbfd"
-        />
+        <meta property="og:image" content="public/linkPreview.png" />
       </Head>
       <Nav />
       <main className={styles.main}>{children}</main>
