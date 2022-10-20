@@ -7,6 +7,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Head>
+        <link rel="shortcut icon" href="/images/favicon.ico" />
         <title>Open Source PM</title>
         <meta
           key="viewport"
