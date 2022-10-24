@@ -1,10 +1,11 @@
-import { createToken } from '@/api-lib/db';
 import { CONFIG as MAIL_CONFIG, sendMail } from '@/api-lib/mail';
-import { auths } from '@/api-lib/middlewares';
-import { getMongoDb } from '@/api-lib/mongodb';
-import { ncOpts } from '@/api-lib/nc';
-import nc from 'next-connect';
+
 import COMPANY_NAME from '../../../../constants.js';
+import { auths } from '@/api-lib/middlewares';
+import { createToken } from '@/api-lib/db';
+import { getMongoDb } from '@/api-lib/mongodb';
+import nc from 'next-connect';
+import { ncOpts } from '@/api-lib/nc';
 
 const handler = nc(ncOpts);
 
@@ -30,8 +31,8 @@ handler.post(async (req, res) => {
     subject: `Verification Email for ${COMPANY_NAME}`,
     html: `
       <div>
-        <p>Hello, ${req.user.name}</p>
-        <p>Please follow <a href="${process.env.WEB_URI}/verify-email/${token._id}">this link</a> to confirm your email.</p>
+        <p>hi, ${req.user.name}</p>
+        <p>smack <a href="${process.env.WEB_URI}/verify-email/${token._id}">this link</a> to confirm your email.</p>
       </div>
       `,
   });
