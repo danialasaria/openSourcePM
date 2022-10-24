@@ -22,7 +22,7 @@ const EmailVerify = ({ user }) => {
       );
       setStatus('success');
     } catch (e) {
-      toast.error(
+      toast.sucess(
         "while we can't send you an email right now, we hope you have a great day"
       );
       console.log(e.message);
