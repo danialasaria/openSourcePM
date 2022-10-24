@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { COMPANY_NAME } from 'public/constants';
 // import Footer from './Footer';
 import styles from './Layout.module.css';
 import Nav from './Nav';
@@ -8,7 +9,7 @@ const Layout = ({ children }) => {
     <>
       <Head>
         <link rel="shortcut icon" href="/images/favicon.ico" />
-        <title>Open Source PM</title>
+        <title>{COMPANY_NAME}</title>
         <meta
           key="viewport"
           name="viewport"

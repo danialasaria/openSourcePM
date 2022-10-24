@@ -4,6 +4,7 @@ import { auths } from '@/api-lib/middlewares';
 import { getMongoDb } from '@/api-lib/mongodb';
 import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
+import COMPANY_NAME from '../../../public/constants';
 
 const handler = nc(ncOpts);
 
@@ -26,7 +27,7 @@ handler.post(async (req, res) => {
   await sendMail({
     to: req.user.email,
     from: MAIL_CONFIG.from,
-    subject: `Verification Email for ${process.env.WEB_URI}`,
+    subject: `Verification Email for ${COMPANY_NAME}`,
     html: `
       <div>
         <p>Hello, ${req.user.name}</p>

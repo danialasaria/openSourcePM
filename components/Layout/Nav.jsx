@@ -11,6 +11,7 @@ import Container from './Container';
 import styles from './Nav.module.css';
 import Spacer from './Spacer';
 import Wrapper from './Wrapper';
+import { COMPANY_NAME } from 'public/constants';
 
 const UserMenu = ({ user, mutate }) => {
   const menuRef = useRef();
@@ -107,7 +108,7 @@ const Nav = () => {
           justifyContent="space-between"
         >
           <Link href="/">
-            <a className={styles.logo}>Open Source PM</a>
+            <a className={styles.logo}>{COMPANY_NAME}</a>
           </Link>
           <Container>
             {user ? (
