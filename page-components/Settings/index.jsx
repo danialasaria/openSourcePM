@@ -1,14 +1,15 @@
+import { Container, Spacer } from '@/components/Layout';
+import { Input, Textarea } from '@/components/Input';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
 import { Avatar } from '@/components/Avatar';
 import { Button } from '@/components/Button';
-import { Input, Textarea } from '@/components/Input';
-import { Container, Spacer } from '@/components/Layout';
 import Wrapper from '@/components/Layout/Wrapper';
 import { fetcher } from '@/lib/fetch';
+import styles from './Settings.module.css';
+import toast from 'react-hot-toast';
 import { useCurrentUser } from '@/lib/user';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import toast from 'react-hot-toast';
-import styles from './Settings.module.css';
 
 const EmailVerify = ({ user }) => {
   const [status, setStatus] = useState();
@@ -21,7 +22,10 @@ const EmailVerify = ({ user }) => {
       );
       setStatus('success');
     } catch (e) {
-      toast.error(e.message);
+      toast.error(
+        "while we can't send you an email right now, we hope you have a great day"
+      );
+      console.log(e.message);
       setStatus('');
     }
   }, []);
