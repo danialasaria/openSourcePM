@@ -28,7 +28,7 @@ handler.post(async (req, res) => {
   await sendMail({
     to: req.user.email,
     from: MAIL_CONFIG.from,
-    subject: `Verification Email for ${COMPANY_NAME}`,
+    subject: `verificiation email for ${COMPANY_NAME}`,
     html: `
       <div>
         <p>hi, ${req.user.name}</p>
