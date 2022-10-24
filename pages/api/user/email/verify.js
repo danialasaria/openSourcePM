@@ -4,7 +4,7 @@ import { auths } from '@/api-lib/middlewares';
 import { getMongoDb } from '@/api-lib/mongodb';
 import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
-import COMPANY_NAME from '../../../public/constants';
+import COMPANY_NAME from '../../../../constants.js';
 
 const handler = nc(ncOpts);
 
