@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { COMPANY_NAME } from 'public/constants';
+import { COMPANY_NAME } from 'constants';
 // import Footer from './Footer';
 import styles from './Layout.module.css';
 import Nav from './Nav';
