@@ -32,7 +32,7 @@ handler.post(async (req, res) => {
     html: `
       <div>
         <p>hi, ${req.user.name}</p>
-        <p>smack <a href="${process.env.WEB_URI}/verify-email/${token._id}">this link</a> to confirm your email.</p>
+        <p>click <a href="${process.env.WEB_URI}/verify-email/${token._id}">this link</a> to confirm your email.</p>
       </div>
       `,
   });
