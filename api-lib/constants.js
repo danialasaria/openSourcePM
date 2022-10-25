@@ -4,6 +4,8 @@ export const ValidateProps = {
     name: { type: 'string', minLength: 1, maxLength: 50 },
     password: { type: 'string', minLength: 8 },
     email: { type: 'string', minLength: 1 },
+    personalSite: { type: 'string', minLength: 1, maxLength: 50 },
+    linkedin: { type: 'string', minLength: 1, maxLength: 50 },
     bio: { type: 'string', minLength: 0, maxLength: 160 },
   },
   post: {

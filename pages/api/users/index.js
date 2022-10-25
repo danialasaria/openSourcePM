@@ -1,12 +1,13 @@
-import { ValidateProps } from '@/api-lib/constants';
-import { findUserByEmail, findUserByUsername, insertUser } from '@/api-lib/db';
 import { auths, validateBody } from '@/api-lib/middlewares';
+import { findUserByEmail, findUserByUsername, insertUser } from '@/api-lib/db';
+
+import { ValidateProps } from '@/api-lib/constants';
 import { getMongoDb } from '@/api-lib/mongodb';
-import { ncOpts } from '@/api-lib/nc';
-import { slugUsername } from '@/lib/user';
-import nc from 'next-connect';
 import isEmail from 'validator/lib/isEmail';
+import nc from 'next-connect';
+import { ncOpts } from '@/api-lib/nc';
 import normalizeEmail from 'validator/lib/normalizeEmail';
+import { slugUsername } from '@/lib/user';
 
 const handler = nc(ncOpts);
 
@@ -59,6 +60,8 @@ handler.post(
       bio: '',
       name,
       username,
+      linkedin: '',
+      personalSite: '',
     });
     req.logIn(user, (err) => {
       if (err) throw err;

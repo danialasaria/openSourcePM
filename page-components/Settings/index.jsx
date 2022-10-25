@@ -114,6 +114,8 @@ const Auth = () => {
 const AboutYou = ({ user, mutate }) => {
   const usernameRef = useRef();
   const nameRef = useRef();
+  const linkedinRef = useRef();
+  const personalSiteRef = useRef();
   const bioRef = useRef();
   const profilePictureRef = useRef();
 
@@ -141,6 +143,8 @@ const AboutYou = ({ user, mutate }) => {
         formData.append('username', usernameRef.current.value);
         formData.append('name', nameRef.current.value);
         formData.append('bio', bioRef.current.value);
+        formData.append('linkedin', linkedinRef.current.value);
+        formData.append('personalSite', personalSiteRef.current.value);
         if (profilePictureRef.current.files[0]) {
           formData.append('profilePicture', profilePictureRef.current.files[0]);
         }
@@ -165,32 +169,39 @@ const AboutYou = ({ user, mutate }) => {
     usernameRef.current.value = user.username;
     nameRef.current.value = user.name;
     bioRef.current.value = user.bio;
+    linkedinRef.current.value = user.linkedin;
     profilePictureRef.current.value = '';
+    personalSiteRef.current.value = user.personalSite;
     setAvatarHref(user.profilePicture);
   }, [user]);
 
   return (
     <section className={styles.card}>
       <h4 className={styles.sectionTitle}>About You</h4>
+      <span className={styles.label}>Your Avatar</span>
+      <div className={styles.avatar}>
+        <Avatar size={96} username={user.username} url={avatarHref} />
+        {/*logic to store profile photo*/}
+        <input
+          aria-label="Your Avatar"
+          type="file"
+          accept="image/*"
+          ref={profilePictureRef}
+          onChange={onAvatarChange}
+        />
+      </div>
+      <Spacer size={0.5} axis="vertical" />
       <form onSubmit={onSubmit}>
         <Input ref={usernameRef} label="Your Username" />
         <Spacer size={0.5} axis="vertical" />
         <Input ref={nameRef} label="Your Name" />
         <Spacer size={0.5} axis="vertical" />
+        <Input ref={linkedinRef} label="Your LinkedIn" />
+        <Spacer size={0.5} axis="vertical" />
+        <Input ref={personalSiteRef} label="Your Personal Website" />
+        <Spacer size={0.5} axis="vertical" />
         <Textarea ref={bioRef} label="Your Bio" />
         <Spacer size={0.5} axis="vertical" />
-        <span className={styles.label}>Your Avatar</span>
-        <div className={styles.avatar}>
-          <Avatar size={96} username={user.username} url={avatarHref} />
-          {/*logic to store profile photo*/}
-          <input
-            aria-label="Your Avatar"
-            type="file"
-            accept="image/*"
-            ref={profilePictureRef}
-            onChange={onAvatarChange}
-          />
-        </div>
         <Spacer size={0.5} axis="vertical" />
         <Button
           htmlType="submit"

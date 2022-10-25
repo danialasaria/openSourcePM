@@ -1,12 +1,13 @@
-import { ValidateProps } from '@/api-lib/constants';
-import { findUserByUsername, updateUserById } from '@/api-lib/db';
 import { auths, validateBody } from '@/api-lib/middlewares';
-import { getMongoDb } from '@/api-lib/mongodb';
-import { ncOpts } from '@/api-lib/nc';
-import { slugUsername } from '@/lib/user';
+import { findUserByUsername, updateUserById } from '@/api-lib/db';
+
+import { ValidateProps } from '@/api-lib/constants';
 import { v2 as cloudinary } from 'cloudinary';
+import { getMongoDb } from '@/api-lib/mongodb';
 import multer from 'multer';
 import nc from 'next-connect';
+import { ncOpts } from '@/api-lib/nc';
+import { slugUsername } from '@/lib/user';
 
 //multer is a package to parse uploaded files
 //initialize an instance of multer configured to save the file to our temp folder
@@ -43,6 +44,8 @@ handler.patch(
       username: ValidateProps.user.username,
       name: ValidateProps.user.name,
       bio: ValidateProps.user.bio,
+      linkedin: ValidateProps.user.linkedin,
+      personalSite: ValidateProps.user.personalSite,
     },
     additionalProperties: true,
   }),
@@ -66,7 +69,7 @@ handler.patch(
       });
       profilePicture = image.secure_url;
     }
-    const { name, bio } = req.body;
+    const { name, bio, linkedin, personalSite } = req.body;
 
     let username;
 
@@ -87,6 +90,8 @@ handler.patch(
       ...(username && { username }),
       ...(name && { name }),
       ...(typeof bio === 'string' && { bio }),
+      ...(linkedin && { linkedin }),
+      ...(personalSite && { personalSite }),
       ...(profilePicture && { profilePicture }),
     });
 

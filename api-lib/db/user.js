@@ -1,5 +1,5 @@
-import bcrypt from 'bcryptjs';
 import { ObjectId } from 'mongodb';
+import bcrypt from 'bcryptjs';
 import normalizeEmail from 'validator/lib/normalizeEmail';
 
 export async function findUserWithEmailAndPassword(db, email, password) {
@@ -56,7 +56,16 @@ export async function updateUserById(db, id, data) {
 
 export async function insertUser(
   db,
-  { email, originalPassword, bio = '', name, profilePicture, username }
+  {
+    email,
+    originalPassword,
+    bio = '',
+    linkedin = '',
+    personalSite = '',
+    name,
+    profilePicture,
+    username,
+  }
 ) {
   const user = {
     emailVerified: false,
@@ -65,6 +74,8 @@ export async function insertUser(
     name,
     username,
     bio,
+    linkedin,
+    personalSite,
   };
   //hash password
   const password = await bcrypt.hash(originalPassword, 10);
