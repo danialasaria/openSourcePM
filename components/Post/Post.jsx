@@ -1,12 +1,19 @@
 import { Avatar } from '@/components/Avatar';
 import { Container } from '@/components/Layout';
-import { format } from '@lukeed/ms';
-import clsx from 'clsx';
 import Link from 'next/link';
-import { useMemo } from 'react';
+import clsx from 'clsx';
+import { format } from '@lukeed/ms';
 import styles from './Post.module.css';
+import { useCommentPages } from '@/lib/comment';
+import { useMemo } from 'react';
 
 const Post = ({ post, className }) => {
+  const { data } = useCommentPages({ postId: post._id });
+
+  const replies = data
+    ? data.reduce((acc, val) => [...acc, ...val.comments], [])
+    : [];
+  const replyCount = replies.length;
   const timestampTxt = useMemo(() => {
     const diff = Date.now() - new Date(post.createdAt).getTime();
     if (diff < 1 * 60 * 1000) return 'Just now';
@@ -36,6 +43,7 @@ const Post = ({ post, className }) => {
         <time dateTime={String(post.createdAt)} className={styles.timestamp}>
           {timestampTxt}
         </time>
+        <p className={styles.name}>{replyCount} replies</p>
       </div>
     </div>
   );
