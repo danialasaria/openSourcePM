@@ -13,6 +13,16 @@ const UserHeader = ({ user }) => {
         <div className={styles.username}>@{user.username}</div>
       </h1>
       <p className={styles.bio}>{user.bio}</p>
+      {user.linkedin && (
+        <a href={user.linkedin} className={styles.bio}>
+          LinkedIn
+        </a>
+      )}
+      {user.personalSite && (
+        <a href={user.personalSite} className={styles.bio}>
+          Personal Website
+        </a>
+      )}
     </Container>
   );
 };
