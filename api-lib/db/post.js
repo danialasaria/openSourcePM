@@ -49,6 +49,31 @@ export async function findPosts(db, before, by, limit = 10) {
     .toArray();
 }
 
+export async function searchPosts(db, searchTerm, limit = 10) {
+  return db
+    .collection('posts')
+    .aggregate([
+      {
+        $match: {
+          ...(searchTerm && { content: { $eq: searchTerm } }),
+        },
+      },
+      { $sort: { _id: -1 } },
+      { $limit: limit },
+      // {
+      //   $lookup: {
+      //     from: 'users',
+      //     localField: 'creatorId',
+      //     foreignField: '_id',
+      //     as: 'creator',
+      //   },
+      // },
+      { $unwind: '$content' },
+      { $project: dbProjectionUsers('creator.') },
+    ])
+    .toArray();
+}
+
 export async function insertPost(db, { content, creatorId }) {
   const post = {
     content,
