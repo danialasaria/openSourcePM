@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hoangvvo/nextjs-mongodb-app.git"
+    "url": "https://github.com/danialasaria/openSourcePM"
   },
   "author": "Danial Asaria",
   "license": "MIT",
