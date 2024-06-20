@@ -21,7 +21,7 @@ const Hero = () => {
           <Spacer axis="horizontal" size={1} />
           <Container>
             <ButtonLink
-              href="mailto:dasaria@usc.edu"
+              href="mailto:danialasaria@gmail.com"
               type="secondary"
               className={styles.button}
             >
