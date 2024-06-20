@@ -15,7 +15,6 @@ const Post = ({ post, className }) => {
   return (
     <div className={clsx(styles.root, className)}>
       <Link href={`/user/${post.creator.username}`}>
-        <a>
           <Container className={styles.creator}>
             <Avatar
               size={36}
@@ -27,7 +26,6 @@ const Post = ({ post, className }) => {
               <p className={styles.username}>{post.creator.username}</p>
             </Container>
           </Container>
-        </a>
       </Link>
       <div className={styles.wrap}>
         <p className={styles.content}>{post.content}</p>

@@ -24,9 +24,9 @@ const UserPosts = ({ user }) => {
             key={post._id}
             href={`/user/${post.creator.username}/post/${post._id}`}
           >
-            <a className={styles.wrap}>
+            <span className={styles.wrap}>
               <Post className={styles.post} post={post} />
-            </a>
+            </span>
           </Link>
         ))}
         <Container justifyContent="center">

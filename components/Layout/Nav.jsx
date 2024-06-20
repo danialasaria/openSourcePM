@@ -74,10 +74,10 @@ const UserMenu = ({ user, mutate }) => {
         {visible && (
           <div className={styles.menu}>
             <Link passHref href={`/user/${user.username}`}>
-              <a className={styles.item}>Profile</a>
+              <span className={styles.item}>Profile</span>
             </Link>
             <Link passHref href="/settings">
-              <a className={styles.item}>Settings</a>
+              <span className={styles.item}>Settings</span>
             </Link>
             <div className={styles.item} style={{ cursor: 'auto' }}>
               <Container alignItems="center">
@@ -108,7 +108,7 @@ const Nav = () => {
           justifyContent="space-between"
         >
           <Link href="/">
-            <a className={styles.logo}>{COMPANY_NAME}</a>
+            <span className={styles.logo}>{COMPANY_NAME}</span>
           </Link>
           <Container>
             {user ? (
