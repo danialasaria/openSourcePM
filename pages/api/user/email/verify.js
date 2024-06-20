@@ -1,6 +1,6 @@
 import { CONFIG as MAIL_CONFIG, sendMail } from '@/api-lib/mail';
 
-import COMPANY_NAME from '../../../../constants.js';
+import { COMPANY_NAME } from '../../../../constants.js';
 import { auths } from '@/api-lib/middlewares';
 import { createToken } from '@/api-lib/db';
 import { getMongoDb } from '@/api-lib/mongodb';
