@@ -42,7 +42,8 @@
 }
 
 .wrap {
-  margin-top: 16px;
+  display: flex;
+  color: '#666';
 }
 
 .content {

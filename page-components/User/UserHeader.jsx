@@ -14,14 +14,18 @@ const UserHeader = ({ user }) => {
       </h1>
       <p className={styles.bio}>{user.bio}</p>
       {user.linkedin && (
-        <a href={user.linkedin} className={styles.bio}>
-          LinkedIn
-        </a>
+        <div style={{textDecoration: 'underline'}}>
+          <a href={user.linkedin} className={styles.bio}>
+            LinkedIn
+          </a>
+        </div>
       )}
       {user.personalSite && (
-        <a href={user.personalSite} className={styles.bio}>
-          Personal Website
-        </a>
+        <div style={{textDecoration: 'underline'}}>
+          <a href={user.personalSite} className={styles.bio}>
+            Personal Website
+          </a>
+        </div>
       )}
     </Container>
   );

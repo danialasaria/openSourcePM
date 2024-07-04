@@ -1,16 +1,30 @@
 import { Avatar } from '@/components/Avatar';
 import { Container } from '@/components/Layout';
-import { format } from '@lukeed/ms';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useMemo } from 'react';
+import { useCommentPages } from '@/lib/comment';
 import styles from './Post.module.css';
 
 const Post = ({ post, className }) => {
+  const { data } = useCommentPages(
+    { postId: post._id }
+  );
+  const comments = data
+    ? data.reduce((acc, val) => [...acc, ...val.comments], [])
+    : [];
+  const numberOfReplies = comments.length;
   const timestampTxt = useMemo(() => {
-    const diff = Date.now() - new Date(post.createdAt).getTime();
-    if (diff < 1 * 60 * 1000) return 'Just now';
-    return `${format(diff, true)} ago`;
+    const now = new Date();
+    const createdAt = new Date(post.createdAt);
+    const diffInSeconds = (now - createdAt) / 1000;
+
+    if (diffInSeconds < 60) return 'Just now'; // Less than 1 minute
+    if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m`; // Less than 1 hour
+    if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}h`; // Less than 1 day
+    if (diffInSeconds < 2592000) return `${createdAt.toLocaleString('default', { month: 'short' })} ${createdAt.getDate()}`; // Less than 1 year
+
+    return `${createdAt.toLocaleString('default', { month: 'short' })} ${createdAt.getDate()}, ${createdAt.getFullYear()}`; // More than 1 year
   }, [post.createdAt]);
   return (
     <div className={clsx(styles.root, className)}>
@@ -34,6 +48,12 @@ const Post = ({ post, className }) => {
         <time dateTime={String(post.createdAt)} className={styles.timestamp}>
           {timestampTxt}
         </time>
+        <div style={{display: 'flex', paddingLeft: '4px', paddingTop: '1px'}}>
+          <img src="/images/replyIcon.png" alt='replies icon' height={'16px'} color='grey'/>
+        </div>
+        <div style={{display: 'flex', color: '#666', paddingLeft: '2px'}}>
+          {numberOfReplies}
+        </div>
       </div>
     </div>
   );

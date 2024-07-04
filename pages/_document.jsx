@@ -16,9 +16,17 @@ class MyDocument extends Document {
             crossOrigin="true"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&amp;display=swap"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap"
             rel="stylesheet"
           />
+          <style>
+            {`
+              a {
+                text-decoration: none;
+                color: inherit;
+              }
+            `}
+          </style>
         </Head>
         <body>
           <Main />
