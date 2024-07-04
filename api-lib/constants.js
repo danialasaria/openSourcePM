@@ -9,9 +9,9 @@ export const ValidateProps = {
     bio: { type: 'string', minLength: 0, maxLength: 10000 },
   },
   post: {
-    content: { type: 'string', minLength: 1, maxLength: 500 },
+    content: { type: 'string', minLength: 1, maxLength: 1000 },
   },
   comment: {
-    content: { type: 'string', minLength: 1, maxLength: 500 },
+    content: { type: 'string', minLength: 1, maxLength: 1000 },
   },
 };
