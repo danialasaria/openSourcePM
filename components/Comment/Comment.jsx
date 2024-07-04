@@ -2,6 +2,8 @@ import { Avatar } from '@/components/Avatar';
 import { Container } from '@/components/Layout';
 import clsx from 'clsx';
 import Link from 'next/link';
+import Linkify from 'react-linkify';
+import { CustomLink } from '../CustomLink';
 import { useMemo } from 'react';
 import styles from './Comment.module.css';
 
@@ -34,7 +36,15 @@ const Comment = ({ comment, className }) => {
           </Container>
       </Link>
       <div className={styles.wrap}>
-        <p className={styles.content}>{comment.content}</p>
+        <p className={styles.content}>
+          <Linkify componentDecorator={(decoratedHref, decoratedText, key) => (
+              <CustomLink href={decoratedHref} key={key}>
+                {decoratedText}
+              </CustomLink>
+            )}>
+              {comment.content}
+            </Linkify>
+        </p>
       </div>
       <div className={styles.wrap}>
         <time dateTime={String(comment.createdAt)} className={styles.timestamp}>
